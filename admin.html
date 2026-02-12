@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de Administración - El Silencio Koffee</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.admin-section {
+    background: #fff;
+    padding: 30px;
+    margin-bottom: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border-left: 6px solid var(--primary-coffee);
+}
+
+.admin-section h3 {
+    margin-bottom: 20px;
+    color: var(--primary-coffee);
+}
+
+.product-form-table input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(198,165,123,0.4);
+    border-radius: 10px;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.order-table th {
+    background: var(--primary-coffee);
+    color: var(--cream);
+    padding: 14px;
+}
+
+.order-table td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(198,165,123,0.2);
+}
+
+.order-table tr:last-child td {
+    border-bottom: none;
+}
+
+.order-status {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.order-status.Pendiente { background: #fff3cd; }
+.order-status.EnProceso { background: #cfe2ff; }
+.order-status.Completado { background: #d1e7dd; }
+.order-status.Cancelado { background: #f8d7da; }
+
+.order-status-select {
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid rgba(198,165,123,0.4);
+}
+</style>
+</head>
+<a href="https://wa.me/573002084703?text=Hola%20El%20Silencio%20Koffee%20☕,%20quiero%20más%20información%20sobre%20sus%20cafés."
+   class="whatsapp-float"
+   target="_blank"
+   rel="noopener">
+   💬
+</a>
+
+<style>
+.whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25D366;
+    color: white;
+    font-size: 28px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    z-index: 999;
+    transition: transform 0.2s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+.logo-container img {
+    height: 60px;
+    width: auto;
+}
+</style>
+
+
+<body>
+
+<header>
+<div class="container">
+<div class="logo-container">
+    <img src="images/Logo de El Silencio Koffee.jpeg" alt="El Silencio Koffee">
+</div>
+<nav>
+<ul>
+<li><a href="index.html">Inicio</a></li>
+<li><a href="productos.html">Cafés</a></li>
+<li><a href="carrito.html">Carrito (<span id="cart-count">0</span>)</a></li>
+
+<li class="user-menu" style="display:none;">
+<a href="#" id="user-display">Usuario</a>
+<ul class="dropdown">
+<li><a href="perfil.html">Mi Perfil</a></li>
+<li><a href="historial.html">Mis Pedidos</a></li>
+<li><a href="#" id="logout-btn">Cerrar Sesión</a></li>
+</ul>
+</li>
+
+<li class="admin-menu" style="display:none;">
+<a href="admin.html">Admin Panel</a>
+</li>
+<li>
+<a href="https://www.instagram.com/silenciokoffee?igsh=dWdiNWZvMzkwMjAy" target="_blank" rel="noopener">
+Instagram
+</a>
+</li>
+
+</ul>
+</nav>
+</div>
+</header>
+
+<main class="container">
+<h2>Panel Administrativo ☕</h2>
+
+<div class="admin-section">
+<h3>Crear Nuevo Café</h3>
+
+<form id="create-product-form">
+<table class="product-form-table">
+<tr>
+<td>Nombre:</td>
+<td><input type="text" id="prod-nombre" required placeholder="Ej: Café en Grano 250g"></td>
+</tr>
+
+<tr>
+<td>Precio (COP):</td>
+<td><input type="number" id="prod-precio" required></td>
+</tr>
+
+<tr>
+<td>Stock:</td>
+<td><input type="number" id="prod-stock" required></td>
+</tr>
+
+<tr>
+<td>Categoría:</td>
+<td><input type="text" id="prod-categoria" required placeholder="250g, 1 libra, 5 libras"></td>
+</tr>
+
+<tr>
+<td>Descripción:</td>
+<td><input type="text" id="prod-descripcion" required placeholder="Notas, perfil, tipo de tostado..."></td>
+</tr>
+
+<tr>
+<td colspan="2">
+<button type="submit" class="btn btn-primary">
+Añadir Café
+</button>
+</td>
+</tr>
+</table>
+</form>
+</div>
+
+<div class="admin-section">
+<h3>Gestión de Pedidos</h3>
+
+<table class="order-table">
+<thead>
+<tr>
+<th>ID</th>
+<th>Cliente</th>
+<th>Fecha</th>
+<th>Total</th>
+<th>Estado</th>
+<th>Cambiar Estado</th>
+</tr>
+</thead>
+<tbody id="admin-orders-body"></tbody>
+</table>
+</div>
+
+</main>
+
+<footer>
+<div class="social-links">
+  <a href="https://www.facebook.com/profile.php?id=61587861547424" target="_blank" rel="noopener">Facebook</a>
+  <a href="https://www.instagram.com/silenciokoffee?igsh=dWdiNWZvMzkwMjAy" target="_blank" rel="noopener">Instagram</a>
+</div>
+
+
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+const ordersBody = document.getElementById('admin-orders-body');
+const createProductForm = document.getElementById('create-product-form');
+
+createProductForm.addEventListener('submit', function(e) {
+e.preventDefault();
+
+const newProduct = {
+id: db.productos.length + 1,
+nombre: document.getElementById('prod-nombre').value,
+precio: parseFloat(document.getElementById('prod-precio').value),
+stock: parseInt(document.getElementById('prod-stock').value),
+categoria: document.getElementById('prod-categoria').value,
+descripcion: document.getElementById('prod-descripcion').value,
+imagen: "images/default_cafe.jpg"
+};
+
+db.productos.push(newProduct);
+saveDB();
+alert(`Café '${newProduct.nombre}' creado con ID ${newProduct.id}.`);
+createProductForm.reset();
+});
+
+function renderOrders() {
+ordersBody.innerHTML = '';
+
+if (db.pedidos.length === 0) {
+ordersBody.innerHTML =
+'<tr><td colspan="6" style="text-align:center;">No hay pedidos registrados.</td></tr>';
+return;
+}
+
+db.pedidos.forEach(order => {
+const row = document.createElement('tr');
+
+row.innerHTML = `
+<td>${order.id}</td>
+<td>${order.username}</td>
+<td>${order.date}</td>
+<td>COP $${order.total}</td>
+<td><span class="order-status ${order.status.replace(' ', '')}">
+${order.status}
+</span></td>
+<td>
+<select class="order-status-select"
+data-id="${order.id}"
+onchange="updateOrderStatus(this)">
+<option value="Pendiente" ${order.status === 'Pendiente' ? 'selected' : ''}>Pendiente</option>
+<option value="En Proceso" ${order.status === 'En Proceso' ? 'selected' : ''}>En Proceso</option>
+<option value="Completado" ${order.status === 'Completado' ? 'selected' : ''}>Completado</option>
+<option value="Cancelado" ${order.status === 'Cancelado' ? 'selected' : ''}>Cancelado</option>
+</select>
+</td>
+`;
+
+ordersBody.appendChild(row);
+});
+}
+
+window.updateOrderStatus = function(selectElement) {
+const orderId = parseInt(selectElement.dataset.id);
+const newStatus = selectElement.value;
+const order = db.pedidos.find(p => p.id === orderId);
+
+if (order) {
+order.status = newStatus;
+saveDB();
+renderOrders();
+alert(`Estado del pedido #${orderId} actualizado.`);
+}
+};
+
+renderOrders();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - El Silencio Koffee</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container {
+            max-width: 420px;
+            margin: 70px auto;
+            padding: 35px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border-top: 6px solid var(--primary-coffee);
+        }
+
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(198,165,123,0.4);
+            border-radius: 12px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--coffee-light);
+            box-shadow: 0 0 0 4px rgba(198,165,123,0.15);
+        }
+
+        .auth-container p {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<a href="https://wa.me/573002084703?text=Hola%20El%20Silencio%20Koffee%20☕,%20quiero%20más%20información%20sobre%20sus%20cafés."
+   class="whatsapp-float"
+   target="_blank"
+   rel="noopener">
+   💬
+</a>
+
+<style>
+.whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25D366;
+    color: white;
+    font-size: 28px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    z-index: 999;
+    transition: transform 0.2s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+</style>
+
+<body>
+
+<header>
+    <div class="container">
+        <h1 class="logo">El Silencio Koffee</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Cafés</a></li>
+                <li><a href="index.html#ubicacion">Ubicación</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="login.html">Iniciar Sesión</a></li>
+                <li><a href="carrito.html">Carrito (<span id="cart-count">0</span>)</a></li>
+
+                <li class="user-menu" style="display:none;">
+                    <a href="#" id="user-display">Usuario</a>
+                    <ul class="dropdown">
+                        <li><a href="perfil.html">Mi Perfil</a></li>
+                        <li><a href="historial.html">Mis Pedidos</a></li>
+                        <li><a href="#" id="logout-btn">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+
+                <li class="admin-menu" style="display:none;">
+                    <a href="admin.html">Admin Panel</a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/silenciokoffee?igsh=dWdiNWZvMzkwMjAy" target="_blank" rel="noopener">
+                        Instagram
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <div class="auth-container">
+        <h2>Iniciar Sesión</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Acceder</button>
+        </form>
+        <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2026 El Silencio Koffee. Todos los derechos reservados.</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=61587861547424" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.instagram.com/silenciokoffee?igsh=dWdiNWZvMzkwMjAy" target="_blank" rel="noopener">Instagram</a>
+        </div>
+
+
+    </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        const result = loginUser(username, password);
+
+        if (result.success) {
+            alert(`Bienvenido, ${result.user.nombre.split(' ')[0]} ☕`);
+            if (result.user.role === 'admin') {
+                window.location.href = 'admin.html';
+            } else {
+                window.location.href = 'index.html';
+            }
+        } else {
+            alert(result.message);
+        }
+    });
+</script>
+
+</body>
+</html>

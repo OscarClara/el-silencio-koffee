@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafés - El Silencio Koffee</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Controles de filtro: look premium */
+        .filter-controls {
+            display: grid;
+            grid-template-columns: 1fr 220px 220px;
+            gap: 12px;
+            margin: 20px 0 30px;
+            align-items: center;
+        }
+        .filter-controls input, .filter-controls select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid rgba(198, 165, 123, 0.35);
+            border-radius: 12px;
+            background: #fff;
+            outline: none;
+        }
+        .filter-controls input:focus, .filter-controls select:focus {
+            border-color: rgba(198, 165, 123, 0.8);
+            box-shadow: 0 0 0 4px rgba(198, 165, 123, 0.18);
+        }
+
+        /* Badge presentación/tipo */
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(198, 165, 123, 0.20);
+            color: #2A1E15;
+            border: 1px solid rgba(198, 165, 123, 0.35);
+            margin: 10px 0 6px;
+        }
+
+        .description { color: #6B6157; margin: 8px 0 12px; }
+        .stock { color: #6B6157; margin-top: 6px; font-size: 0.95em; }
+
+        @media (max-width: 820px) {
+            .filter-controls { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<a href="https://wa.me/573002084703?text=Hola%20El%20Silencio%20Koffee%20☕,%20quiero%20más%20información%20sobre%20sus%20cafés."
+   class="whatsapp-float"
+   target="_blank"
+   rel="noopener">
+   💬
+</a>
+
+<style>
+.whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25D366;
+    color: white;
+    font-size: 28px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    z-index: 999;
+    transition: transform 0.2s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+</style>
+
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">El Silencio Koffee</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="productos.html">Cafés</a></li>
+                    <li><a href="index.html#ubicacion">Ubicación</a></li>
+                    <li><a href="registro.html">Registro</a></li>
+                    <li><a href="login.html">Iniciar Sesión</a></li>
+                    <li><a href="carrito.html">Carrito (<span id="cart-count">0</span>)</a></li>
+
+                    <li class="user-menu" style="display:none;">
+                        <a href="#" id="user-display">Usuario</a>
+                        <ul class="dropdown">
+                            <li><a href="perfil.html">Mi Perfil</a></li>
+                            <li><a href="historial.html">Mis Pedidos</a></li>
+                            <li><a href="#" id="logout-btn">Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="admin-menu" style="display:none;">
+                        <a href="admin.html">Admin Panel</a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/silenciokoffee?igsh=dWdiNWZvMzkwMjAy" target="_blank" rel="noopener">
+                            Instagram
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Nuestros Cafés</h2>
+        <p style="color:#6B6157; max-width: 760px;">
+            Café tostado fresco, en grano y molido. Presentación principal 250g y opciones
+            de 1 lb y 5 lb para cafeterías y restaurantes.
+        </p>
+
+        <div class="filter-controls">
+            <input type="text" id="search-input" placeholder="Buscar por nombre (ej: 250g, grano, profesional)...">
+
+            <select id="presentation-filter">
+                <option value="todos">Todas las presentaciones</option>
+                <option value="250g">250g</option>
+                <option value="1 libra">1 lb</option>
+                <option value="5 libras">5 lb</option>
+            </select>
+
+            <select id="type-filter">
+                <option value="todos">Todos los tipos</option>
+                <option value="Grano">Grano</option>
+                <option value="Molido">Molido</option>
+                <option value="Profesional">Profesional</option>
+            </select>
+        </div>
+
+        <div class="product-grid" id="all-products-container"></div>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=61587861547424" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.instagram.com/silenciokoffee?igsh=dWdiNWZvMzkwMjAy" target="_blank" rel="noopener">Instagram</a>
+        </div>
+
+
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('all-products-container');
+            const searchInput = document.getElementById('search-input');
+            const presentationFilter = document.getElementById('presentation-filter');
+            const typeFilter = document.getElementById('type-filter');
+
+            function getPresentationFromCategory(cat) {
+                const c = (cat || '').toLowerCase();
+                if (c.includes('250g')) return '250g';
+                if (c.includes('1')) return '1 libra';
+                if (c.includes('5')) return '5 libras';
+                return 'otros';
+            }
+
+            function getTypeFromNameOrCategory(p) {
+                const name = (p.nombre || '').toLowerCase();
+                const cat = (p.categoria || '').toLowerCase();
+                if (name.includes('grano') || cat.includes('grano')) return 'Grano';
+                if (name.includes('molido') || cat.includes('molido')) return 'Molido';
+                if (name.includes('profesional') || cat.includes('profesional')) return 'Profesional';
+                return 'Otro';
+            }
+
+            function formatCOP(n) {
+                try {
+                    return new Intl.NumberFormat('es-CO').format(n);
+                } catch {
+                    return n;
+                }
+            }
+
+            function renderProducts(products) {
+                container.innerHTML = '';
+                products.forEach(producto => {
+                    const pres = getPresentationFromCategory(producto.categoria);
+                    const tipo = getTypeFromNameOrCategory(producto);
+
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('product-card');
+                    productCard.innerHTML = `
+                        <img src="${producto.imagen}" alt="${producto.nombre}">
+                        <div style="padding: 15px;">
+                            <div class="badge">${pres.toUpperCase()} • ${tipo}</div>
+                            <h4>${producto.nombre}</h4>
+                            <p class="description">${(producto.descripcion || '').substring(0, 90)}...</p>
+                            <p class="price">COP $${formatCOP(producto.precio)}</p>
+                            <p class="stock">Stock: ${producto.stock} unidades</p>
+                            <button class="btn btn-primary add-to-cart" data-id="${producto.id}">Añadir al Carrito</button>
+                        </div>
+                    `;
+                    container.appendChild(productCard);
+                });
+            }
+
+            function filterAndSearchProducts() {
+                const query = searchInput.value.toLowerCase().trim();
+                const pres = presentationFilter.value;
+                const tipo = typeFilter.value;
+
+                let filtered = db.productos;
+
+                if (pres !== 'todos') {
+                    filtered = filtered.filter(p => getPresentationFromCategory(p.categoria) === pres);
+                }
+
+                if (tipo !== 'todos') {
+                    filtered = filtered.filter(p => getTypeFromNameOrCategory(p) === tipo);
+                }
+
+                if (query) {
+                    filtered = filtered.filter(p => {
+                        const blob = `${p.nombre} ${p.categoria} ${p.descripcion}`.toLowerCase();
+                        return blob.includes(query);
+                    });
+                }
+
+                renderProducts(filtered);
+            }
+
+            searchInput.addEventListener('input', filterAndSearchProducts);
+            presentationFilter.addEventListener('change', filterAndSearchProducts);
+            typeFilter.addEventListener('change', filterAndSearchProducts);
+
+            // Carga inicial
+            renderProducts(db.productos);
+            updateCartCount();
+            checkLoginStatus();
+        });
+    </script>
+</body>
+</html>

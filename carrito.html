@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - El Silencio Koffee</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .cart-table th {
+            background-color: var(--primary-coffee);
+            color: var(--cream);
+            padding: 15px;
+            text-align: left;
+        }
+
+        .cart-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(198,165,123,0.2);
+        }
+
+        .cart-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .quantity-input {
+            width: 60px;
+            padding: 6px;
+            border: 1px solid rgba(198,165,123,0.4);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .cart-total {
+            text-align: right;
+            margin-top: 30px;
+            font-size: 1.6em;
+            font-weight: 700;
+            color: var(--primary-coffee);
+        }
+
+        .checkout-btn-group {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: var(--coffee-dark);
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .remove-btn:hover {
+            color: #b00020;
+        }
+    </style>
+</head>
+<a href="https://wa.me/573002084703?text=Hola%20El%20Silencio%20Koffee%20☕,%20quiero%20más%20información%20sobre%20sus%20cafés."
+   class="whatsapp-float"
+   target="_blank"
+   rel="noopener">
+   💬
+</a>
+
+<style>
+.whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25D366;
+    color: white;
+    font-size: 28px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    z-index: 999;
+    transition: transform 0.2s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+</style>
+
+<body>
+
+<header>
+    <div class="container">
+        <h1 class="logo">El Silencio Koffee</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Cafés</a></li>
+                <li><a href="index.html#ubicacion">Ubicación</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="login.html">Iniciar Sesión</a></li>
+                <li><a href="carrito.html">Carrito (<span id="cart-count">0</span>)</a></li>
+
+                <li class="user-menu" style="display:none;">
+                    <a href="#" id="user-display">Usuario</a>
+                    <ul class="dropdown">
+                        <li><a href="perfil.html">Mi Perfil</a></li>
+                        <li><a href="historial.html">Mis Pedidos</a></li>
+                        <li><a href="#" id="logout-btn">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+
+                <li class="admin-menu" style="display:none;">
+                    <a href="admin.html">Admin Panel</a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/silenciokoffee?igsh=dWdiNWZvMzkwMjAy" target="_blank" rel="noopener">
+                        Instagram
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <h2>Tu Carrito ☕</h2>
+
+    <div id="cart-content">
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio Unitario</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="cart-items"></tbody>
+        </table>
+
+        <div class="cart-total">
+            Total: <span id="cart-total-value">COP $0</span>
+        </div>
+
+        <div class="checkout-btn-group">
+            <button id="checkout-btn" class="btn btn-primary" disabled>
+                Finalizar Compra
+            </button>
+        </div>
+    </div>
+
+    <p id="empty-cart-message"
+       style="text-align:center; font-size:1.2em; margin-top:60px; display:none;">
+       Tu carrito está vacío.
+       <a href="productos.html">Explora nuestros cafés</a>
+    </p>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2026 El Silencio Koffee. Todos los derechos reservados.</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=61587861547424" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.instagram.com/silenciokoffee?igsh=dWdiNWZvMzkwMjAy" target="_blank" rel="noopener">Instagram</a>
+        </div>
+
+
+    </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const cartItemsBody = document.getElementById('cart-items');
+    const cartTotalValue = document.getElementById('cart-total-value');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const emptyMessage = document.getElementById('empty-cart-message');
+
+    function formatCOP(n) {
+        return new Intl.NumberFormat('es-CO').format(n);
+    }
+
+    function renderCart() {
+        cartItemsBody.innerHTML = '';
+        let total = 0;
+
+        if (cart.length === 0) {
+            emptyMessage.style.display = 'block';
+            checkoutBtn.disabled = true;
+            return;
+        } else {
+            emptyMessage.style.display = 'none';
+            checkoutBtn.disabled = false;
+        }
+
+        cart.forEach(item => {
+            const subtotal = item.price * item.quantity;
+            total += subtotal;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td>COP $${formatCOP(item.price)}</td>
+                <td>
+                    <input type="number" class="quantity-input"
+                        data-id="${item.id}"
+                        value="${item.quantity}"
+                        min="1"
+                        onchange="updateQuantity(this)">
+                </td>
+                <td>COP $${formatCOP(subtotal)}</td>
+                <td>
+                    <button class="remove-btn"
+                        onclick="removeItem(${item.id})">✕</button>
+                </td>
+            `;
+            cartItemsBody.appendChild(row);
+        });
+
+        cartTotalValue.textContent = `COP $${formatCOP(total)}`;
+    }
+
+    window.updateQuantity = function(input) {
+        const id = parseInt(input.dataset.id);
+        const quantity = parseInt(input.value);
+        updateCartItemQuantity(id, quantity);
+        renderCart();
+    };
+
+    window.removeItem = function(id) {
+        removeFromCart(id);
+        renderCart();
+    };
+
+    checkoutBtn.addEventListener('click', () => {
+
+if (cart.length === 0) return;
+
+let mensaje = "Hola El Silencio Koffee ☕,%0AQuiero realizar el siguiente pedido:%0A%0A";
+
+cart.forEach(item => {
+    mensaje += `${item.quantity} x ${item.name}%0A`;
+});
+
+let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+mensaje += `%0ATotal: COP $${total}`;
+
+window.open(`https://wa.me/573002084703?text=${mensaje}`, '_blank');
+});
+
+    });
+
+    renderCart();
+
+</script>
+
+</body>
+</html>
