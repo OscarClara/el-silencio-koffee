@@ -1,0 +1,490 @@
+/* Variables de Colores */
+:root {
+  --primary-coffee: #5A3E2B;   /* Marrón principal */
+  --coffee-dark: #2A1E15;      /* Marrón muy oscuro */
+  --coffee-light: #C6A57B;     /* Beige/dorado suave */
+  --cream: #F5F1EC;            /* Fondo crema */
+  --dark-text: #2B2B2B;
+  --muted-text: #6B6157;
+
+  --header-bg: #1E140F;
+  --footer-bg: #150E0A;
+
+  --success-green: #4CAF50;
+  --shadow: 0 10px 30px rgba(0,0,0,0.10);
+  --shadow-soft: 0 6px 18px rgba(0,0,0,0.08);
+
+  --radius: 14px;
+}
+
+
+
+/* Estilos Generales */
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+    color: var(--primary-coffee);
+    margin-top: 0;
+}
+
+h1.logo {
+    color: var(--light-bg);
+    margin: 0;
+    font-size: 2.5em;
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary-coffee);
+    color: var(--light-bg);
+}
+
+.btn-primary:hover {
+    background-color: var(--button-hover);
+}
+
+.btn-secondary {
+    background-color: var(--wood-brown);
+    color: var(--light-bg);
+}
+
+.btn-secondary:hover {
+    background-color: darken(var(--wood-brown), 10%); /* Esto requeriría SASS/LESS, aquí es conceptual */
+    background-color: #6a350f; /* Un tono más oscuro manualmente */
+}
+
+/* Header */
+header {
+    background-color: var(--header-bg);
+    color: var(--light-bg);
+    padding: 10px;
+    border-bottom: 3px solid var(--coffee-light);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center; /* Para alinear elementos como el carrito */
+}
+
+header nav ul li {
+    margin-left: 20px;
+    position: relative; /* Para el menú desplegable */
+}
+
+header nav ul li a {
+    color: var(--cream);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: var(--primary-coffee);
+}
+
+/* Dropdown para usuario */
+.dropdown {
+    display: none;
+    position: absolute;
+    background-color: var(--header-bg);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    list-style: none;
+    padding: 10px 0;
+    border-radius: 5px;
+    top: 100%; /* Posiciona debajo del elemento padre */
+    left: 0;
+}
+
+.user-menu:hover .dropdown {
+    display: block;
+}
+
+.dropdown li {
+    margin: 0;
+}
+
+.dropdown li a {
+    color: var(--light-bg);
+    padding: 8px 15px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown li a:hover {
+    background-color:var(--primary-coffee);
+    color: var(--light-bg);
+}
+
+
+/* Hero Section */
+#hero {
+    background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93')
+    no-repeat center center/cover;
+    color: var(--light-bg);
+    text-align: center;
+    padding: 100px 0;
+    position: relative;
+}
+
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay oscuro para legibilidad */
+    z-index: 1;
+}
+
+#hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+#hero h2 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    color: var(--light-bg); /* Cambiar color para que contraste con el overlay */
+}
+
+#hero p {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    color: var(--light-bg);
+}
+
+/* Secciones de Contenido */
+section {
+    padding: 40px 0;
+}
+
+section h3 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.product-card h4 {
+    font-size: 1.5em;
+    margin: 15px 10px 5px;
+    color: var(--dark-text);
+}
+
+.product-card .price {
+    font-size: 1.4em;
+    color: var(--primary-coffee);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.product-card .btn {
+    margin-bottom: 15px;
+}
+
+/* About Us Section */
+#about-us {
+    background-color: var(--primary-coffee);
+}
+
+
+#about-us h3 {
+    color: var(--light-bg);
+    margin-bottom: 25px;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.about-image {
+    flex: 1;
+    min-height: 300px;
+    background: url('https://via.placeholder.com/600x400?text=Nuestra+Tienda') no-repeat center center/cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+
+/* Footer */
+footer {
+    background-color: var(--footer-bg);
+    color: var(--light-bg);
+    text-align: center;
+    padding: 20px 0;
+    border-top: 3px solid var(--coffee-light);
+
+}
+
+footer .social-links a {
+    color: var(--light-bg);
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+footer .social-links a:hover {
+    color: var(--primary-coffee);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap; /* Permite que los elementos del menú se envuelvan */
+        justify-content: center;
+    }
+
+    header nav ul li {
+        margin: 5px 10px; /* Ajusta márgenes para pantallas pequeñas */
+    }
+
+    #hero h2 {
+        font-size: 2.5em;
+    }
+
+    #hero p {
+        font-size: 1em;
+    }
+
+    .about-content {
+        flex-direction: column;
+    }
+}
+/* =========================
+   EL SILENCIO KOFFEE - ARTESANAL PREMIUM
+   (Pegar al FINAL del style.css)
+   ========================= */
+
+/* Base */
+body {
+  background-color: var(--cream);
+  color: var(--dark-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-coffee);
+  letter-spacing: 0.5px;
+}
+
+/* Header */
+header {
+  background-color: var(--header-bg);
+  border-bottom: 3px solid var(--coffee-light);
+}
+
+header nav ul li a:hover {
+  color: var(--coffee-light);
+}
+
+/* Logo */
+h1.logo {
+  color: var(--cream);
+  letter-spacing: 1px;
+}
+
+/* Botones premium */
+.btn {
+  border-radius: 999px;
+  padding: 10px 18px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.btn-primary {
+  background-color: var(--primary-coffee);
+  color: var(--cream);
+}
+
+.btn-primary:hover {
+  background-color: var(--coffee-dark);
+}
+
+.btn-secondary {
+  background-color: var(--coffee-light);
+  color: var(--coffee-dark);
+}
+
+.btn-secondary:hover {
+  background-color: #B89468;
+}
+
+/* Hero premium (café real + overlay elegante) */
+#hero {
+  background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1600&q=80')
+    no-repeat center center/cover;
+}
+
+#hero::before {
+  background: rgba(20, 12, 8, 0.60);
+}
+
+#hero h2 {
+  color: var(--cream);
+  font-size: 3.2em;
+  letter-spacing: 1px;
+}
+
+#hero p {
+  color: rgba(245, 241, 236, 0.92);
+  max-width: 720px;
+  margin: 0 auto 30px;
+}
+
+/* Secciones: más aire + look boutique */
+section {
+  padding: 56px 0;
+}
+
+section h3 {
+  color: var(--primary-coffee);
+}
+
+/* Cards de producto premium */
+.product-card {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(198, 165, 123, 0.35);
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+}
+
+.product-card img {
+  height: 200px;
+}
+
+.product-card .price {
+  color: var(--primary-coffee);
+}
+
+/* About premium */
+#about-us {
+  background: linear-gradient(135deg, var(--primary-coffee), var(--coffee-dark));
+}
+
+#about-us h3 {
+  color: var(--cream);
+}
+
+#about-us p {
+  color: rgba(245, 241, 236, 0.92);
+}
+
+.about-image {
+  border-radius: var(--radius);
+  background: url('https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=1200&q=80')
+    no-repeat center center/cover;
+}
+
+/* Footer premium */
+footer {
+  background-color: var(--footer-bg);
+  border-top: 3px solid var(--coffee-light);
+}
+
+footer .social-links a:hover {
+  color: var(--coffee-light);
+}
+
+/* Texto “fine print” */
+.product-card h4 {
+  color: var(--dark-text);
+}
+
+.product-card p,
+#about-us p {
+  line-height: 1.8;
+}
+

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Silencio Koffee | Café tostado en grano y molido</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PFKCKFDB');</script>
+<!-- End Google Tag Manager -->
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4B483BLYD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z4B483BLYD');
+</script>
+<a href="https://wa.me/573002084703?text=Hola%20El%20Silencio%20Koffee%20☕,%20quiero%20más%20información%20sobre%20sus%20cafés."
+   class="whatsapp-float"
+   target="_blank"
+   rel="noopener">
+   💬
+</a>
+
+<style>
+.whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25D366;
+    color: white;
+    font-size: 28px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    z-index: 999;
+    transition: transform 0.2s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+.logo-container img {
+    height: 80px;
+    width: auto;
+}
+</style>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <img src="images/Logo de El Silencio Koffee.jpeg" alt="El Silencio Koffee">
+            </div>
+            <h1 class="logo">El Silencio Koffee</h1>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="productos.html">Cafés</a></li>
+                    <li><a href="#ubicacion">Ubicación</a></li>
+                    <li><a href="registro.html">Registro</a></li>
+                    <li><a href="login.html">Iniciar Sesión</a></li>
+                    <li><a href="carrito.html">Carrito (<span id="cart-count">0</span>)</a></li>
+
+                    <li class="user-menu" style="display:none;">
+                        <a href="#" id="user-display">Usuario</a>
+                        <ul class="dropdown">
+                            <li><a href="perfil.html">Mi Perfil</a></li>
+                            <li><a href="historial.html">Mis Pedidos</a></li>
+                            <li><a href="#" id="logout-btn">Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="admin-menu" style="display:none;">
+                        <a href="admin.html">Admin Panel</a>
+                    </li>
+                    <li>
+                        <a href="" target="_blank" rel="noopener">
+                            Instagram
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Café tostado fresco, en grano y molido</h2>
+                <p>
+                    El Silencio Koffee: sabor, aroma y calidad. Presentaciones de 250g
+                    y opciones de 1 lb y 5 lb para cafeterías y restaurantes.
+                </p>
+                <a href="productos.html" class="btn btn-primary">Ver Cafés</a>
+            </div>
+        </section>
+        <section id="contacto" class="container">
+                <h3>Contáctanos</h3>
+                <p>Síguenos y haz tus pedidos:</p>
+                <a href="https://www.instagram.com/silenciokoffee?igsh=MXVnaHFwM2R2ejV5cA==" target="_blank">Instagram</a> |
+                <a href="https://www.facebook.com/profile.php?id=61587861547424" target="_blank">Facebook</a> |
+                <a href="https://wa.me/573002084703?text=Hola!%20Quiero%20hacer%20un%20pedido%20de%20café.">WhatsApp</a>
+        </section>
+
+
+        <section id="featured-products" class="container">
+            <h3>Nuestros Destacados</h3>
+            <div class="product-grid" id="destacados-container"></div>
+        </section>
+
+        <section id="about-us">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Sobre El Silencio Koffee</h3>
+                        <p>
+                            Somos una marca de café tostado enfocada en ofrecer una experiencia limpia,
+                            aromática y consistente. Seleccionamos el grano y cuidamos el tostado para
+                            resaltar notas y carácter en cada taza.
+                        </p>
+                        <p>
+                            Vendemos principalmente en bolsas de 250g para hogar, y también tenemos
+                            presentaciones de 1 lb y 5 lb para cafeterías y restaurantes.
+                            ¡Descubre tu perfil favorito!
+                        </p>
+                    </div>
+                    <div class="about-image">
+                        <!-- Aquí puedes poner una imagen: una bolsa, granos, o una foto de tostado -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ubicacion" class="container" style="padding: 40px 0;">
+            <h3>Ubicación</h3>
+            <p><strong>Dirección:</strong> Calle 26 # 20-33, Manizales, Caldas, Colombia</p>
+
+            <div style="margin-top: 15px; border-radius: 10px; overflow: hidden;">
+                <iframe
+                    title="Mapa El Silencio Koffee"
+                    width="100%"
+                    height="320"
+                    frameborder="0"
+                    style="border:0;"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    allowfullscreen
+                    src="https://www.google.com/maps?q=Calle%2026%20%23%2020-33%20Manizales%20Caldas%20Colombia&output=embed">
+                </iframe>
+            </div>
+
+            <div style="margin-top: 12px;">
+                <a class="btn btn-secondary"
+                   target="_blank"
+                   rel="noopener"
+                   href="https://www.google.com/maps?q=Calle%2026%20%23%2020-33%20Manizales%20Caldas%20Colombia">
+                    Cómo llegar
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 El Silencio Koffee. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/silenciokoffee?igsh=MXVnaHFwM2R2ejV5cA==" target="_blank">Instagram</a>
+                <a href="https://www.facebook.com/profile.php?id=61587861547424" target="_blank" rel="noopener">Facebook</a>
+                <a href="https://www.instagram.com/silenciokoffee?igsh=dWdiNWZvMzkwMjAy" target="_blank" rel="noopener">Instagram</a>
+            </div>
+
+
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const destacadosContainer = document.getElementById('destacados-container');
+
+            // IDs de cafés destacados (ajusta según tu "db" en script.js)
+            const destacadosIDs = [1, 3, 5];
+
+            const productosDestacados = destacadosIDs.map(id => getProductById(id));
+
+            destacadosContainer.innerHTML = '';
+
+            productosDestacados.forEach(productoDestacado => {
+                if (productoDestacado) {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('product-card');
+                    productCard.innerHTML = `
+                        <img src="${productoDestacado.imagen}" alt="${productoDestacado.nombre}">
+                        <h4>${productoDestacado.nombre}</h4>
+                        <p class="price">COP $${productoDestacado.precio}</p>
+                        <button class="btn btn-secondary add-to-cart"
+                            data-id="${productoDestacado.id}"
+                            data-nombre="${productoDestacado.nombre}"
+                            data-precio="${productoDestacado.precio}">
+                            Añadir al Carrito
+                        </button>
+                    `;
+                    destacadosContainer.appendChild(productCard);
+                }
+            });
+
+            updateCartCount();
+            checkLoginStatus();
+        });
+    </script>
+</body>
+</html>
